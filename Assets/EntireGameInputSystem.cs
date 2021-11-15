@@ -41,6 +41,14 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause Button"",
+                    ""type"": ""Button"",
+                    ""id"": ""36c700a6-63c3-4e82-9423-0f866a9212ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,17 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4edae631-916e-48d7-9fb5-0c6574d54a10"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause Button"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +150,7 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
         m_Master_MouseLook = m_Master.FindAction("MouseLook", throwIfNotFound: true);
         m_Master_Movement = m_Master.FindAction("Movement", throwIfNotFound: true);
         m_Master_Jump = m_Master.FindAction("Jump", throwIfNotFound: true);
+        m_Master_PauseButton = m_Master.FindAction("Pause Button", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +203,7 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Master_MouseLook;
     private readonly InputAction m_Master_Movement;
     private readonly InputAction m_Master_Jump;
+    private readonly InputAction m_Master_PauseButton;
     public struct MasterActions
     {
         private @EntireGameInputSystem m_Wrapper;
@@ -190,6 +211,7 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
         public InputAction @MouseLook => m_Wrapper.m_Master_MouseLook;
         public InputAction @Movement => m_Wrapper.m_Master_Movement;
         public InputAction @Jump => m_Wrapper.m_Master_Jump;
+        public InputAction @PauseButton => m_Wrapper.m_Master_PauseButton;
         public InputActionMap Get() { return m_Wrapper.m_Master; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +230,9 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_MasterActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_MasterActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_MasterActionsCallbackInterface.OnJump;
+                @PauseButton.started -= m_Wrapper.m_MasterActionsCallbackInterface.OnPauseButton;
+                @PauseButton.performed -= m_Wrapper.m_MasterActionsCallbackInterface.OnPauseButton;
+                @PauseButton.canceled -= m_Wrapper.m_MasterActionsCallbackInterface.OnPauseButton;
             }
             m_Wrapper.m_MasterActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +246,9 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @PauseButton.started += instance.OnPauseButton;
+                @PauseButton.performed += instance.OnPauseButton;
+                @PauseButton.canceled += instance.OnPauseButton;
             }
         }
     }
@@ -230,5 +258,6 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
         void OnMouseLook(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPauseButton(InputAction.CallbackContext context);
     }
 }
