@@ -49,6 +49,14 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DialogueAdvance"",
+                    ""type"": ""Button"",
+                    ""id"": ""c66afbd3-74ea-4989-8694-5890c2f07d78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Pause Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68b4936d-699d-46f8-9b2d-aab1ed93cb7f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DialogueAdvance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -151,6 +170,7 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
         m_Master_Movement = m_Master.FindAction("Movement", throwIfNotFound: true);
         m_Master_Jump = m_Master.FindAction("Jump", throwIfNotFound: true);
         m_Master_PauseButton = m_Master.FindAction("Pause Button", throwIfNotFound: true);
+        m_Master_DialogueAdvance = m_Master.FindAction("DialogueAdvance", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,6 +224,7 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Master_Movement;
     private readonly InputAction m_Master_Jump;
     private readonly InputAction m_Master_PauseButton;
+    private readonly InputAction m_Master_DialogueAdvance;
     public struct MasterActions
     {
         private @EntireGameInputSystem m_Wrapper;
@@ -212,6 +233,7 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Master_Movement;
         public InputAction @Jump => m_Wrapper.m_Master_Jump;
         public InputAction @PauseButton => m_Wrapper.m_Master_PauseButton;
+        public InputAction @DialogueAdvance => m_Wrapper.m_Master_DialogueAdvance;
         public InputActionMap Get() { return m_Wrapper.m_Master; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +255,9 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                 @PauseButton.started -= m_Wrapper.m_MasterActionsCallbackInterface.OnPauseButton;
                 @PauseButton.performed -= m_Wrapper.m_MasterActionsCallbackInterface.OnPauseButton;
                 @PauseButton.canceled -= m_Wrapper.m_MasterActionsCallbackInterface.OnPauseButton;
+                @DialogueAdvance.started -= m_Wrapper.m_MasterActionsCallbackInterface.OnDialogueAdvance;
+                @DialogueAdvance.performed -= m_Wrapper.m_MasterActionsCallbackInterface.OnDialogueAdvance;
+                @DialogueAdvance.canceled -= m_Wrapper.m_MasterActionsCallbackInterface.OnDialogueAdvance;
             }
             m_Wrapper.m_MasterActionsCallbackInterface = instance;
             if (instance != null)
@@ -249,6 +274,9 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
                 @PauseButton.started += instance.OnPauseButton;
                 @PauseButton.performed += instance.OnPauseButton;
                 @PauseButton.canceled += instance.OnPauseButton;
+                @DialogueAdvance.started += instance.OnDialogueAdvance;
+                @DialogueAdvance.performed += instance.OnDialogueAdvance;
+                @DialogueAdvance.canceled += instance.OnDialogueAdvance;
             }
         }
     }
@@ -259,5 +287,6 @@ public class @EntireGameInputSystem : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPauseButton(InputAction.CallbackContext context);
+        void OnDialogueAdvance(InputAction.CallbackContext context);
     }
 }
