@@ -692,7 +692,7 @@ MonoBehaviour:
   dialogueBoxGUI: {fileID: 1221609703}
   letterDelay: 0.1
   letterMultiplier: 0.5
-  Names: Ada
+  Names: 
   dialogueLines: []
   letterisMultiplied: 0
   dialogueActive: 0
@@ -1291,7 +1291,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 3.62
-  m_Radius: 0.62
+  m_Radius: 1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1678,7 +1678,7 @@ GameObject:
   - component: {fileID: 1535027141}
   - component: {fileID: 1535027140}
   m_Layer: 0
-  m_Name: Chat Background
+  m_Name: ChatBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1755,7 +1755,7 @@ GameObject:
   - component: {fileID: 1549418071}
   - component: {fileID: 1549418070}
   m_Layer: 0
-  m_Name: Name
+  m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1813,7 +1813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name
+  m_Text: Kingdoms Edge sucks
 --- !u!222 &1549418071
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1852,7 +1852,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.69
+  m_Radius: 2
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -1934,7 +1934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chatBackground: {fileID: 1535027139}
   npcCharacter: {fileID: 1808636848}
-  Name: Nigel
+  Name: Aeiou
   sentences:
   - Howdy Partner
   - This thing actually work?
@@ -2034,7 +2034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
