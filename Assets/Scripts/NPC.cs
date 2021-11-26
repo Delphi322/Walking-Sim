@@ -17,7 +17,7 @@ public class NPC : MonoBehaviour
     [TextArea(5, 10)]
     public string[] sentences;
 
-    private void Start()
+    void Start()
     {
         dialogueSystem = FindObjectOfType<DialogueSystem>();
     }
@@ -37,7 +37,7 @@ public class NPC : MonoBehaviour
         if ((other.gameObject.tag == "Player") && kb.spaceKey.wasPressedThisFrame)
         {
             this.gameObject.GetComponent<NPC>().enabled = true;
-            dialogueSystem.name = Name;
+            dialogueSystem.Names = Name;
             dialogueSystem.dialogueLines = sentences;
             FindObjectOfType<DialogueSystem>().NPCName();
         }
