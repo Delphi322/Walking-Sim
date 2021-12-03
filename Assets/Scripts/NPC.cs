@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
 
     private DialogueSystem dialogueSystem;
 
+    bool playerHere = false;
     public string Name;
 
     [TextArea(5, 10)]
@@ -27,14 +28,8 @@ public class NPC : MonoBehaviour
         Vector3 Pos = Camera.main.WorldToScreenPoint(npcCharacter.position);
         Pos.y += 175;
         chatBackground.position = Pos;
-    }
-
-    public void OnTriggerStay(Collider other)
-    {
         Keyboard kb = InputSystem.GetDevice<Keyboard>();
-        this.gameObject.GetComponent<NPC>().enabled = true;
-        FindObjectOfType<DialogueSystem>().EnterRangeOfNPC();
-        if ((other.gameObject.tag == "Player") && kb.spaceKey.wasPressedThisFrame)
+        if (playerHere && kb.spaceKey.wasPressedThisFrame)
         {
             this.gameObject.GetComponent<NPC>().enabled = true;
             dialogueSystem.Names = Name;
@@ -43,8 +38,22 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void OnTriggerStay(Collider other)
+    {
+        this.gameObject.GetComponent<NPC>().enabled = true;
+        FindObjectOfType<DialogueSystem>().EnterRangeOfNPC();
+        if ((other.gameObject.tag == "Player"))
+        {
+            playerHere = true;
+        }
+    }
+
     public void OnTriggerExit(Collider other)
     {
+        if ((other.gameObject.tag == "Player"))
+        {
+            playerHere = false;
+        }
         FindObjectOfType<DialogueSystem>().OutOfRange();
         this.gameObject.GetComponent<NPC>().enabled = false;
     }
